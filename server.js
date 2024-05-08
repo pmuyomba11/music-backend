@@ -58,3 +58,20 @@ app.get('/music', async (req, res) => {
         return res.status(500).json({error: error.message})
     }
 })
+
+//Show route..
+app.get('/music/:id', async (req, res) => {
+    try {
+        if(!mongoose.isValidObjectId(req.params.id)){
+            return res.status(404).json({message: 'ID not located'})
+        }
+        const showMusic = await Music.findById(req.params.id)
+        if(!showMusic){
+            return res.status(404).json({message: 'Music not found'})
+        }
+        return res.status(200).json(showMusic)
+        
+    } catch (error) {
+        return res.status(500).json({error: error.message})
+    }
+})
