@@ -75,3 +75,19 @@ app.get('/music/:id', async (req, res) => {
         return res.status(500).json({error: error.message})
     }
 })
+
+//Update route....
+app.put('/music/:id', async (req, res) => {
+    try {
+        if(!mongoose.isValidObjectId(req.params.id)){
+            return res.status(404).json({message: 'Id IS NOT LOCATED'})
+        }
+        const updateMusic = await Music.findByIdAndUpdate(req.params.id, req.body,{new: true})
+        if(!updateMusic){
+            return res.status(422).json({message: 'Sorry, we cannot update the music'})
+        }
+        return res.status(201).json(updateMusic)
+    } catch (error) {
+        return res.status(500).json({error: error.message})
+    }
+})
