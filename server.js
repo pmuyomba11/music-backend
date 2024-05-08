@@ -48,3 +48,13 @@ app.post('/music', async (req, res) => {
         return res.status(500).json({ message: error.message })
     }
 })
+
+//Index Route.....
+app.get('/music', async (req, res) => {
+    try {
+        const music = await Music.find({}).select('-__v')
+        return res.status(200).json(music)
+    } catch (error) {
+        return res.status(500).json({error: error.message})
+    }
+})
