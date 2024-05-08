@@ -55,40 +55,40 @@ app.get('/music', async (req, res) => {
         const music = await Music.find({}).select('-__v')
         return res.status(200).json(music)
     } catch (error) {
-        return res.status(500).json({error: error.message})
+        return res.status(500).json({ error: error.message })
     }
 })
 
 //Show route..
 app.get('/music/:id', async (req, res) => {
     try {
-        if(!mongoose.isValidObjectId(req.params.id)){
-            return res.status(404).json({message: 'ID not located'})
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(404).json({ message: 'ID not located' })
         }
         const showMusic = await Music.findById(req.params.id)
-        if(!showMusic){
-            return res.status(404).json({message: 'Music not found'})
+        if (!showMusic) {
+            return res.status(404).json({ message: 'Music not found' })
         }
         return res.status(200).json(showMusic)
-        
+
     } catch (error) {
-        return res.status(500).json({error: error.message})
+        return res.status(500).json({ error: error.message })
     }
 })
 
 //Update route....
 app.put('/music/:id', async (req, res) => {
     try {
-        if(!Music.exist({_id: req.params.id})){
-            return res.status(404).json({message: 'Music not found'})
+        if (!Music.exists({ _id: req.params.id })) {
+            return res.status(404).json({ message: 'Music not found' })
         }
-        const updateMusic = await Music.findByIdAndUpdate(req.params.id, req.body,{new: true})
-        if(!updateMusic){
-            return res.status(422).json({message: 'Sorry, we cannot update the music'})
+        const updateMusic = await Music.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        if (!updateMusic) {
+            return res.status(422).json({ message: 'Sorry, we cannot update the music' })
         }
         return res.status(201).json(updateMusic)
     } catch (error) {
-        return res.status(500).json({error: error.message})
+        return res.status(500).json({ error: error.message })
     }
 })
 
@@ -96,15 +96,15 @@ app.put('/music/:id', async (req, res) => {
 //delete route....
 app.delete('/music/:id', async (req, res) => {
     try {
-        if(!mongoose.isValidObjectId(req.params.id)){
-            return res.status(404).json({message: 'Id IS NOT LOCATED'})
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(404).json({ message: 'Id IS NOT LOCATED' })
         }
         const deletedMusic = await Music.findByIdAndDelete(req.params.id)
-        if(!deletedMusic){
-            return res.status(422).json({message: 'Check Id'})
+        if (!deletedMusic) {
+            return res.status(422).json({ message: 'Check Id' })
         }
-        return res.status(200).json({message: 'Successfully deleted!'})
+        return res.status(200).json({ message: 'Successfully deleted!' })
     } catch (error) {
-        return res.status(500).json({error: error.message})
+        return res.status(500).json({ error: error.message })
     }
 })
