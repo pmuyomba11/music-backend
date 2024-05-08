@@ -79,7 +79,7 @@ app.get('/music/:id', async (req, res) => {
 //Update route....
 app.put('/music/:id', async (req, res) => {
     try {
-        if (!Music.exists({ _id: req.params.id })) {
+        if (! await Music.exists({ _id: req.params.id })) {
             return res.status(404).json({ message: 'Music not found' })
         }
         const updateMusic = await Music.findByIdAndUpdate(req.params.id, req.body, { new: true })
