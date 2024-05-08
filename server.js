@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const port = process.env.PORT;
 const colors = require('colors');
 const morgan = require('morgan');
+const Music = require('./models/Music')
 
 // Middleware
 app.use(express.json());
