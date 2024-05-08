@@ -3,7 +3,7 @@ const musicSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        maxLength: 50
+       
     },
     artist: {
         type: String,
@@ -12,6 +12,7 @@ const musicSchema = new mongoose.Schema({
     },
     genre: {
         type: String,
+        required:true,
         enum: ['Pop', 'RnB', 'Afro-beats','Dance hall'],
     },
     album: {
